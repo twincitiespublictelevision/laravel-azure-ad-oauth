@@ -14,6 +14,15 @@ class AuthController extends Controller
 
     public function handleOauthResponse()
     {
+        if (!$request->input('code')) {
+          $redirect = redirect(config('azure-oath.redirect_on_error'));
+          $error = 'Login failed: ' .
+            $request->input('error') .
+            ' - ' . 
+            $request->input('error_description');
+          return $redirect->withErrors($error);
+        }
+
         $user = Socialite::driver('azure-oauth')->user();
 
         $authUser = $this->findOrCreateUser($user);
