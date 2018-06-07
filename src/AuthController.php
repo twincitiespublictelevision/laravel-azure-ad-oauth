@@ -2,6 +2,7 @@
 
 namespace Metrogistics\AzureSocialite;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -12,7 +13,7 @@ class AuthController extends Controller
         return Socialite::driver('azure-oauth')->redirect();
     }
 
-    public function handleOauthResponse()
+    public function handleOauthResponse(Request $request)
     {
         if (!$request->input('code')) {
           $redirect = redirect(config('azure-oath.redirect_on_error'));
