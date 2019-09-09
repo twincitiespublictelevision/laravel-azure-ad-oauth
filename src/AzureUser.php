@@ -49,7 +49,7 @@ class AzureUser
                 'client_id' => config('azure-oath.credentials.client_id'),
                 'scope' => 'user.read',
                 'refresh_token' => $this->get()->refreshToken,
-                'redirect_uri' => url(config('azure-oath.credentials.redirect')),
+                'redirect_uri' => config('azure-oath.credentials.redirect'),
                 'grant_type' => 'refresh_token',
                 'client_secret' => config('azure-oath.credentials.client_secret')
             ]
